@@ -1,0 +1,25 @@
+# Uncomment this line to define a global platform for your project
+platform :ios, '14.0'
+
+# CocoaPods analytics sends network stats synchronously affecting flutter build latency.
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+project 'Runner', {
+  'Debug' => :debug,
+  'Profile' => :release,
+  'Release' => :release,
+}
+
+def flutter_installation
+  # Add this to allow Flutter to work with CocoaPods
+  generated_xcode_build_settings = parse_KV_file('../Flutter/Generated.xcconfig')
+  if generated_xcode_build_settings.empty?
+    raise "Generated.xcconfig must exist. Run 'flutter pub get' to generate it."
+  end
+
+  install! 'cocoapods', :integrate_targets => false
+end
+
+target 'Runner' do
+  flutter_installation
+end
