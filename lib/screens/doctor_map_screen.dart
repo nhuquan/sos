@@ -32,21 +32,27 @@ class _DoctorMapScreenState extends State<DoctorMapScreen> {
   final List<Doctor> doctors = [
     Doctor(
       id: '1',
-      name: 'Dr. A',
-      specialty: 'Cardiology',
-      location: LatLng(10.7769, 106.7009),
+      name: 'Dr. Trương Thị Thanh',
+      specialty: 'Ostetrics', // Sản
+      location: LatLng(20.586353, 105.863989),
     ),
     Doctor(
       id: '2',
-      name: 'Dr. B',
-      specialty: 'Dermatology',
-      location: LatLng(10.7755, 106.6995),
+      name: 'Dr. Trịnh Quốc Lực',
+      specialty: 'Traditional Vietnamese Medicine',
+      location: LatLng(20.578294, 105.870417),
     ),
     Doctor(
       id: '3',
-      name: 'Dr. C',
-      specialty: 'Pediatrics',
-      location: LatLng(10.7735, 106.7015),
+      name: 'Dr. Vũ Duy Phong',
+      specialty: 'Dermatology', // da liễu
+      location: LatLng(20.571361, 105.885989),
+    ),
+    Doctor(
+      id: '4',
+      name: 'Dr. Nguyễn Văn Hùng',
+      specialty: 'Pediatrics', // Nhi
+      location: LatLng(20.553778, 105.929821),
     ),
   ];
 
