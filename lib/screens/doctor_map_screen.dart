@@ -3,19 +3,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
-class Doctor {
-  final String id;
-  final String name;
-  final String specialty;
-  final LatLng location;
-
-  Doctor({
-    required this.id,
-    required this.name,
-    required this.specialty,
-    required this.location,
-  });
-}
+import '../data/mock_doctors.dart';
+import '../models/doctor.dart';
 
 class DoctorMapScreen extends StatefulWidget {
   const DoctorMapScreen({super.key});
@@ -27,34 +16,6 @@ class DoctorMapScreen extends StatefulWidget {
 class _DoctorMapScreenState extends State<DoctorMapScreen> {
   LatLng? userLocation;
   Doctor? selectedDoctor;
-
-  // Mock data
-  final List<Doctor> doctors = [
-    Doctor(
-      id: '1',
-      name: 'Dr. Trương Thị Thanh',
-      specialty: 'Ostetrics', // Sản
-      location: LatLng(20.586353, 105.863989),
-    ),
-    Doctor(
-      id: '2',
-      name: 'Dr. Trịnh Quốc Lực',
-      specialty: 'Traditional Vietnamese Medicine',
-      location: LatLng(20.578294, 105.870417),
-    ),
-    Doctor(
-      id: '3',
-      name: 'Dr. Vũ Duy Phong',
-      specialty: 'Dermatology', // da liễu
-      location: LatLng(20.571361, 105.885989),
-    ),
-    Doctor(
-      id: '4',
-      name: 'Dr. Nguyễn Văn Hùng',
-      specialty: 'Pediatrics', // Nhi
-      location: LatLng(20.553778, 105.929821),
-    ),
-  ];
 
   @override
   void initState() {
@@ -119,7 +80,7 @@ class _DoctorMapScreenState extends State<DoctorMapScreen> {
                     });
                   },
                   child: Icon(
-                    Icons.local_hospital,
+                    Icons.location_on_outlined,
                     color: isSelected ? Colors.orange : Colors.red,
                     size: isSelected ? 50 : 30,
                   ),
@@ -133,25 +94,25 @@ class _DoctorMapScreenState extends State<DoctorMapScreen> {
       // Hiển thị thông tin khi chọn bác sĩ
       bottomSheet: selectedDoctor != null
           ? Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [BoxShadow(blurRadius: 5, color: Colors.black26)],
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              selectedDoctor!.name,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [BoxShadow(blurRadius: 5, color: Colors.black26)],
               ),
-            ),
-            Text('Chuyên khoa: ${selectedDoctor!.specialty}'),
-          ],
-        ),
-      )
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    selectedDoctor!.name,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text('Chuyên khoa: ${selectedDoctor!.specialty}'),
+                ],
+              ),
+            )
           : null,
     );
   }
