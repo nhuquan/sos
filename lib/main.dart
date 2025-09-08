@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:sos/screens/doctor_map_screen.dart';
+import 'package:sos/screens/home/home_screen.dart';
 
 void main(){
   runApp(const MyApp());
@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SOS Doctor Map',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const DoctorMapScreen(),
+      theme: ThemeData(primarySwatch: Colors.teal),
+      home: HomeScreen(),
     );
   }
 }
