@@ -70,15 +70,32 @@ class HomeWeb extends StatelessWidget {
 
                       if (state is AuthUnauthenticated) {
                         return TextButton(
-                          onPressed: () => navigate(context, const AuthPage()),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const AuthPage(),
+                              ),
+                            );
+                          },
                           child: const Text(
                             "Đăng ký / Đăng nhập",
                             style: TextStyle(color: Colors.white),
                           ),
                         );
-                      } else {
-                        return const LoadingScreen();
                       }
+                      if (state is AuthLoading) {
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 2,
+                          ),
+                        );
+                      }
+
+                      // fallback
+                      return const SizedBox.shrink();
                     },
                   ),
                 ],
@@ -141,9 +158,6 @@ class HomeWeb extends StatelessWidget {
   }
 
   void navigate(BuildContext context, Widget screen) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => screen),
-    );
+    Navigator.push(context, MaterialPageRoute(builder: (_) => screen));
   }
 }
