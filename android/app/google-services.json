@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "241262397269",
+    "project_id": "sos-map-12c70",
+    "storage_bucket": "sos-map-12c70.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241262397269:android:630800a5d4e57460ac91dc",
+        "android_client_info": {
+          "package_name": "com.example.sos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDJl9bFU6xC7tNOGU66LpMEaKmJFPaylg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
