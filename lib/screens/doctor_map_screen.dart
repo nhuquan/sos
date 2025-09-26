@@ -3,8 +3,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../data/mock_doctors.dart';
-import '../models/doctor.dart';
+import '../services/doctor_service.dart';
+import 'package:sos_server_client/sos_server_client.dart';
+import 'package:sos_server_client/src/protocol/doctor.dart'; // Add this import if Doctor is defined here
 
 class DoctorMapScreen extends StatefulWidget {
   const DoctorMapScreen({super.key});
@@ -14,13 +15,17 @@ class DoctorMapScreen extends StatefulWidget {
 }
 
 class _DoctorMapScreenState extends State<DoctorMapScreen> {
+  final DoctorService _doctorService = DoctorService();
+
   LatLng? userLocation;
   Doctor? selectedDoctor;
+  List<Doctor> doctors = [];
 
   @override
   void initState() {
     super.initState();
     _getCurrentLocation();
+    _loadDoctors();
   }
 
   Future<void> _getCurrentLocation() async {
@@ -33,6 +38,28 @@ class _DoctorMapScreenState extends State<DoctorMapScreen> {
     });
   }
 
+  Future<void> _loadDoctors() async {
+    final result = await _doctorService.getDoctors();
+    setState(() {
+      doctors = result;
+    });
+  }
+
+  // Future<void> _addDoctorAtLocation(LatLng position) async {
+  //   final newDoctor = Doctor(
+  //     id: null, 
+  //     name: "Bác sĩ mới",
+  //     specialty: "Chưa rõ",
+  //     latitude: position.latitude,
+  //     longitude: position.longitude,
+  //   );
+
+  //   final created = await _doctorService.addDoctor(newDoctor);
+  //   setState(() {
+  //     doctors.add(created);
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     if (userLocation == null) {
@@ -42,7 +69,13 @@ class _DoctorMapScreenState extends State<DoctorMapScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Tìm bác sĩ')),
       body: FlutterMap(
-        options: MapOptions(initialCenter: userLocation!, initialZoom: 15),
+        options: MapOptions(
+          initialCenter: userLocation!,
+          initialZoom: 15,
+          // onTap: (tapPosition, latlng) async {
+          //   await _addDoctorAtLocation(latlng);
+          // },
+        ),
         children: [
           TileLayer(
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -72,7 +105,7 @@ class _DoctorMapScreenState extends State<DoctorMapScreen> {
               return Marker(
                 width: 50,
                 height: 50,
-                point: doctor.location,
+                point: LatLng(doctor.latitude, doctor.longitude),
                 child: GestureDetector(
                   onTap: () {
                     setState(() {

@@ -4,7 +4,7 @@ import 'package:sos/features/auth/presentation/components/loading.dart';
 import 'package:sos/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:sos/features/auth/presentation/cubits/auth_states.dart';
 import 'package:sos/features/auth/presentation/pages/auth_page.dart';
-import '../doctor_list_screen.dart';
+import '../doctor_list_screen/doctor_list_screen.dart';
 import '../doctor_map_screen.dart';
 import '../settings_screen.dart';
 
